@@ -6,32 +6,20 @@ import { supabase } from "../../lib/supabase";
 export default function Dashboard() {
 
   useEffect(() => {
+    const handleLogin = async () => {
+      const { data } = await supabase.auth.getSession();
 
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      if (data?.session) {
+        const token = data.session.access_token;
 
-        console.log("EVENT:", event);
-        console.log("SESSION:", session);
-
-        if (session) {
-          const token = session.access_token;
-
-          // 🚀 Redirect to Streamlit app
-          window.location.href =
-            `https://ai-oracle-assistant.streamlit.app?token=${token}`;
-        }
+        // 🔥 Redirect to Streamlit with token
+        window.location.href =
+          "https://ai-oracle-assistant.streamlit.app/?token=" + token;
       }
-    );
-
-    return () => {
-      listener.subscription.unsubscribe();
     };
 
+    handleLogin();
   }, []);
 
-  return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      <h2>Logging you in... 🚀</h2>
-    </div>
-  );
+  return <h2 style={{ textAlign: "center" }}>Logging you in...</h2>;
 }

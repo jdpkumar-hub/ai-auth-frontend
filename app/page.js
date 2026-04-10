@@ -1,17 +1,18 @@
 "use client";
 
-import { supabase } from "../../lib/supabase";
+import { supabase } from "../lib/supabase";
 
 export default function Home() {
 
-  const loginWithGoogle = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: "https://ai-auth-frontend-nine.vercel.app/dashboard"
-      }
-    });
-  };
+ const loginWithGoogle = async () => {
+  await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: window.location.origin + "/dashboard"
+    }
+  });
+};
+
 
   return (
     <div style={{ textAlign: "center", marginTop: "100px" }}>
