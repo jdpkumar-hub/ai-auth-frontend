@@ -8,7 +8,7 @@ export default function Home() {
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: "https://ai-auth-frontend.vercel.app/dashboard"
+        redirectTo: "https://ai-auth-frontend-nine.vercel.app/dashboard"
       }
     });
   };
