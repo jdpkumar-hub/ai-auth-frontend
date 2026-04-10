@@ -7,7 +7,6 @@ export default function Dashboard() {
 
   useEffect(() => {
 
-    // 🔥 THIS IS THE FIX
     const { data: listener } = supabase.auth.onAuthStateChange(
       async (event, session) => {
 
@@ -17,8 +16,9 @@ export default function Dashboard() {
         if (session) {
           const token = session.access_token;
 
-          // 🚀 redirect to Streamlit
-          window.location.href = `https://ai-oracle-assistant.streamlit.app?token=${token}`;
+          // 🚀 Redirect to Streamlit app
+          window.location.href =
+            `https://ai-oracle-assistant.streamlit.app?token=${token}`;
         }
       }
     );
